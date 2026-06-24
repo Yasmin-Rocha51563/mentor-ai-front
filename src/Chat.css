@@ -1,0 +1,57 @@
+.mensagem h1,
+.mensagem h2,
+.mensagem h3 {
+  margin-bottom: 12px;
+}
+
+.mensagem p {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.mensagem ul, .mensagem ol {
+  padding-left: 20px;
+  margin-top: 10px;
+  text-align: left; 
+}
+.mensagem li {
+  margin-bottom: 5px;
+}
+
+.mensagem code {
+  background: #f4f4f4;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.mensagem pre {
+  overflow-x: auto;
+  padding: 12px;
+  border-radius: 8px;
+  background: #1e1e1e;
+  color: white;
+  margin: 12px 0;
+}
+
+.mensagem pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.mensagem a {
+  color: #1565c0;
+  text-decoration: underline;
+}
+
+.mensagem strong {
+  font-weight: 700;
+}
+
+.mensagem blockquote {
+  border-left: 4px solid #1565c0;
+  padding-left: 12px;
+  margin: 12px 0;
+  color: #555;
+}
