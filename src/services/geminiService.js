@@ -31,36 +31,47 @@ export async function obterAvaliacao(area) {
       
       body: JSON.stringify({ area: area }), 
     });
-
-    if (!resposta.ok) {
-     
+    
+    if (!resposta.ok) {   
       const textoErro = await resposta.text();
-      console.error("Erro vindo do servidor:", textoErro);
-      throw new Error("Erro na resposta do servidor ao gerar prova.");
+      throw new Error(`Erro no servidor: ${resposta.status} - ${textoErro}`);
     }
     
-    return await resposta.json(); 
-  } catch (erro) {
-    console.error("Erro detalhado ao obter avaliação:", erro);
-    throw erro;
+    const dados = await resposta.json();
+    return dados;
+  } catch (error) {
+    console.error("Erro em obterAvaliacao:", error.message);
+    throw new Error("Erro na resposta do servidor ao gerar prova.");
   }
 }
 
-export async function enviarRespostasAvaliacao(dadosRespostas){
+export async function enviarRespostasAvaliacao(avaliacaoId, respostasAluno, questoes){
   try {
+    const dadosParaEnviar = {
+      avaliacaoId: avaliacaoId,
+      respostas: questoes.map((q, index) => ({
+        questaoId: q.id || index + 1,
+        alternativa: respostasAluno[index]
+      }))
+    };
+    
     const resposta = await fetch("http:localhost:3000/trilhas/avaliacao/responder", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(dadosRespostas),
+
+      body: JSON.stringify(dadosParaEnviar),
     });
+
     if (!resposta.ok) {
-      throw new Error("Erro na resposta do servidor ao corrigir avaliação");
+      const textoErro = await resposta.text();
+      throw new Error(`Erro do servidor: ${textoErro}`);
     }
     return await resposta.json();
-  } catch (erro) {
-    console.error("Erro ao enviar respostas:", erro);
-    throw erro;
+  } catch (error) {
+    console.error("Erro ao enviar respostas:", error);
+    throw error;
   }
 }
+
