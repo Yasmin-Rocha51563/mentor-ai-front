@@ -58,22 +58,37 @@ async function enviarMensagem() {
       });
 
       const dados = await response.json();
+      console.log("ESTRUTURA REAL DOS DADOS DO BACK-END:", dados);
 
       if (!response.ok) {
         throw new Error(dados.mensagem || dados.error || 'Erro na requisição');
       }
 
-      //garante que pega o texto limpo se vier em .resposta ou em .message
       let textoFinal = "";
-      if (dados.resposta) {
-        textoFinal = typeof dados.resposta === 'object' ? (dados.resposta.message || dados.resposta.texto) : dados.resposta;
-      } else if (dados.message) {
-        textoFinal = dados.message;
-      } else {
-        textoFinal = JSON.stringify(dados);
+
+      try {
+        // Como dados.resposta veio como uma String contendo um JSON bruto, nós a convertemos em Objeto
+        const dadosIA = JSON.parse(dados.resposta);
+        
+        // Pega o texto principal (que veio dentro da chave "resposta" ou "response")
+        const textoPrincipal = dadosIA.resposta || dadosIA.response || "";
+        
+        // Pega a lista de sugestões (que veio dentro de "sugestoes_de_perguntas" ou "suggestions_de_perguntas")
+        const listaBruta = dadosIA.sugestoes_de_perguntas || dadosIA.suggestions_de_perguntas;
+        
+        let listaSugestoes = "";
+        if (Array.isArray(listaBruta)) {
+          listaSugestoes = "\n\n### 🤔 Sugestões de perguntas:\n" + 
+            listaBruta.map(sugestao => `* ${sugestao}`).join("\n");
+        }
+        
+        textoFinal = textoPrincipal + listaSugestoes;
+      } catch (e) {
+        // Plano de fuga caso a resposta em algum momento venha como string comum
+        textoFinal = typeof dados.resposta === 'string' ? dados.resposta : JSON.stringify(dados);
       }
 
-      //respostas geradas pela ia e atualização automática
+      // --- CRITÉRIO: Respostas geradas pela IA e atualização automática ---
       setMensagens((prev) => [
         ...prev,
         { texto: textoFinal, tipo: "recebida" },
