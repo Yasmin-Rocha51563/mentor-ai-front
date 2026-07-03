@@ -12,24 +12,7 @@ export default function Chat() {
 
   //exibição do histórico de conversas ao carregar a tela
   useEffect(() => {
-    async function carregarHistorico() {
-      try {
-        const response = await fetch(`http://localhost:3000/chat/historico?userId=${userId}`);
-        if (response.ok) {
-          const dados = await response.json();
-          //mapeia o formato do banco pro formato visual do seu componente
-          const mensagensFormatadas = dados.flatMap(msg => [
-            { texto: msg.pergunta, tipo: "enviado" },
-            { texto: msg.resposta, tipo: "recebida" }
-          ]);
-          setMensagens(mensagensFormatadas);
-        }
-      } catch (error) {
-        console.error("Erro ao carregar o histórico do banco:", error);
-      }
-    }
-    carregarHistorico();
-  }, [userId]);
+   }, [userId]);
 
 async function enviarMensagem() {
     if (!texto.trim()) return;
