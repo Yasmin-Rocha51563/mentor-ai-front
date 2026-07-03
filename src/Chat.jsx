@@ -67,13 +67,8 @@ async function enviarMensagem() {
       let textoFinal = "";
 
       try {
-        // Como dados.resposta veio como uma String contendo um JSON bruto, nós a convertemos em Objeto
         const dadosIA = JSON.parse(dados.resposta);
-        
-        // Pega o texto principal (que veio dentro da chave "resposta" ou "response")
         const textoPrincipal = dadosIA.resposta || dadosIA.response || "";
-        
-        // Pega a lista de sugestões (que veio dentro de "sugestoes_de_perguntas" ou "suggestions_de_perguntas")
         const listaBruta = dadosIA.sugestoes_de_perguntas || dadosIA.suggestions_de_perguntas;
         
         let listaSugestoes = "";
@@ -84,11 +79,10 @@ async function enviarMensagem() {
         
         textoFinal = textoPrincipal + listaSugestoes;
       } catch (e) {
-        // Plano de fuga caso a resposta em algum momento venha como string comum
         textoFinal = typeof dados.resposta === 'string' ? dados.resposta : JSON.stringify(dados);
       }
 
-      // --- CRITÉRIO: Respostas geradas pela IA e atualização automática ---
+      // respostas geradas pela ia e atualizaçao automática ---
       setMensagens((prev) => [
         ...prev,
         { texto: textoFinal, tipo: "recebida" },
