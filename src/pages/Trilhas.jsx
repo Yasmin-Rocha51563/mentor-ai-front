@@ -15,17 +15,15 @@ export default function Trilhas() {
     setTelaAtual('quiz');
   };
 
-  const handleFinalizarProva = async (dadosDoQuiz) => {
+ const handleFinalizarProva = async (dadosDoQuiz) => {
     setCorrigindo(true);
     setErro('');
     try {
-
-      const respostaFinal = await enviarRespostasAvaliacao({
-        area: dadosDoQuiz.area,
-        respostas: dadosDoQuiz.respostas
-      });
+      const respostaFinal = await enviarRespostasAvaliacao(
+        dadosDoQuiz.area,       
+        dadosDoQuiz.respostas
+      );
       
-      // guarda o retorno do Sequelize (Trilha, avaliação e planos criados)
       setResultadoTrilha(respostaFinal);
       setTelaAtual('resultado');
     } catch (err) {
@@ -48,12 +46,12 @@ export default function Trilhas() {
         </div>
       )}
 
-      {/* Botões de escolha da Área */}
+      {/* botões de escolha da Área */}
       {!corrigindo && telaAtual === 'escolha' && (
         <EscolhaTrilha onProvaGerada={handleProvaGerada} />
       )}
 
-      {/* Formulário com as 10 questões criadas pela IA */}
+      {/* formulário com 10 questões criadas pela IA */}
       {!corrigindo && telaAtual === 'quiz' && provaGerada && (
         <QuizAvaliacao 
           dadosProva={provaGerada} 
@@ -61,7 +59,7 @@ export default function Trilhas() {
         />
       )}
 
-      {/* Exibição dos resultados vindos do Banco de Dados via Sequelize */}
+      {/* exibiçao dos resultados vindos do BD via Sequelize */}
       {!corrigindo && telaAtual === 'resultado' && resultadoTrilha && (
         <div style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ color: '#28a745' }}>🎉 Avaliação Concluída!</h2>

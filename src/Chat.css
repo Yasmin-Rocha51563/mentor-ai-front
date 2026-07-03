@@ -55,3 +55,25 @@
   margin: 12px 0;
   color: #555;
 }
+
+
+.chatHeader {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.btnLimpar {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btnLimpar:hover {
+  background-color: #ff1a1a;
+}

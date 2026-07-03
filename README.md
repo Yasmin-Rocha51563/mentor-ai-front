@@ -1,16 +1,26 @@
-# React + Vite
+# Plataforma de Estudos Inteligente - MentorIA 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma aplicação Full-Stack desenvolvida em React e Node.js que utiliza a API do Google Gemini para criar trilhas de aprendizagem personalizadas baseadas em avaliações diagnósticas e oferece um chat inteligente com histórico persistido.
 
-Currently, two official plugins are available:
+## 🛠️ Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Front-end
+- React.js (com hooks e componentização)
+- React Router Dom (Navegação estruturada)
+- React Markdown (Renderização de respostas da IA)
 
-## React Compiler
+### Back-end
+- Node.js & Express
+- Sequelize (ORM) & SQLite (Banco de dados relacional)
+- SDK Google Gen AI (`@google/genai`)
+- JWT (JsonWebToken) & Bcryptjs (Criptografia de senhas)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📦 Como Executar o Projeto
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Configurar o Back-end
+1. Navegue até a pasta do servidor: `cd backend`
+2. Instale as dependências: `npm install`
+3. Crie um arquivo `.env` na raiz do backend e adicione sua chave da API:
+   ```env
+   GEMINI_API_KEY=sua_chave_aqui
+   JWT_SECRET=sua_chave_secreta_jwt

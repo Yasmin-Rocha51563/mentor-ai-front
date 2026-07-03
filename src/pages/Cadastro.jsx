@@ -10,14 +10,48 @@ const Cadastro = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [erro, setErro] = useState('');
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    localStorage.setItem('userEmail', email);
-    localStorage.setItem('userPassword', password);
-    localStorage.setItem('userName', name);
-    alert('Conta criada com sucesso!');
-    navigate('/');
+    setErro('');
+
+    //validação extra de segurança pros campos obrigatórios
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      alert('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    try {
+      //faz a requisição para a rota de registo do backend
+      const response = await fetch("http://localhost:3000/auth/registrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: name,
+          email: email,
+          senha: password 
+        }),
+      });
+
+      const dados = await response.json();
+
+      if (!response.ok) {
+        throw new Error(dados.mensagem || 'Erro ao realizar o cadastro.');
+      }
+
+      alert('Conta criada com sucesso! Faça seu login.');
+      
+      //redirecionamento após o cadastro executado com sucesso
+      navigate('/');
+
+    } catch (error) {
+      console.error("Erro no cadastro:", error);
+      alert(error.message || 'Erro ao conectar com o servidor.');
+      setErro(error.message);
+    }
   };
 
   return (
@@ -30,6 +64,8 @@ const Cadastro = () => {
         <h1 className={styles.heading}>
           Faça seu cadastro para utilizar a plataforma
         </h1>
+
+        {erro && <p style={{ color: 'red', textAlign: 'center' }}>{erro}</p>}
 
         <form onSubmit={handleRegister} className={styles.form}>
           <InputField 
