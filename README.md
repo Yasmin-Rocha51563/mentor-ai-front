@@ -25,7 +25,7 @@ A arquitetura do Back-end foi desenvolvida seguindo o padrão **MVC (Model-View-
 - JWT (JsonWebToken) & Bcryptjs (Criptografia de senhas)
 
 
-## 🌐 Rotas da API
+## Rotas da API
 
 ### Autenticação
 - `POST /auth/registrar` - Cadastro de novos usuários
