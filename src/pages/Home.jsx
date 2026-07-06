@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import Sidebar from '../components/Sidebar.jsx';
 import Header from '../components/Header.jsx';
@@ -8,6 +8,27 @@ import styles from './HomePage.module.css';
 
 const Home = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+  const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/', { replace: true });
+      return;
+    }
+
+    const handlePageShow = (event) => {
+      if (event.persisted) {
+        const tokenAtualizado = localStorage.getItem('token');
+        if (!tokenAtualizado) {
+          window.location.replace('/');
+        }
+      }
+    };
+
+    window.addEventListener('pageshow', handlePageShow);
+    return () => {
+      window.removeEventListener('pageshow', handlePageShow);
+    };
+  }, [navigate]);
   return (
     <div className={styles.container}>
   

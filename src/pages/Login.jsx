@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo.jsx';
 import LoginForm from '../components/LoginForm.jsx';
@@ -7,11 +7,10 @@ import styles from './LoginPage.module.css';
 const Login = () => {
   const navigate = useNavigate();
   const [erro, setErro] = useState('');
-
+  
   const handleLogin = async ({ email, password }) => {
     setErro('');
     try {
-      //faz a requisição pra rota de login do backend
       const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: {
@@ -23,11 +22,18 @@ const Login = () => {
         }),
       });
 
-      const dados = await response.json();
-
       if (!response.ok) {
-        throw new Error(dados.mensagem || 'Erro ao fazer login.');
+      let mensagemErro = 'Erro ao fazer login.';
+      try {
+        const dadosErro = await response.json();
+        mensagemErro = dadosErro.mensagem || mensagemErro;
+      } catch (e) {
       }
+      throw new Error(mensagemErro);
+    }
+
+      const dados = await response.json();
+      console.log("Saída JSON (Sucesso):", JSON.stringify(dados, null, 2));
 
       //guarda o Token JWT e o ID do usuario de forma segura np navegador
       localStorage.setItem('token', dados.token);

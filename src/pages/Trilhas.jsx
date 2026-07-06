@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ButtonWithIcon from '../components/ButtonWithIcon.jsx';
+import { Plus } from 'lucide-react';
 import EscolhaTrilha from './EscolhaTrilha';
 import QuizAvaliacao from './QuizAvaliacao';
 import { enviarRespostasAvaliacao } from '../services/geminiService';
@@ -51,7 +53,7 @@ export default function Trilhas() {
         <EscolhaTrilha onProvaGerada={handleProvaGerada} />
       )}
 
-      {/* formulário com 10 questões criadas pela IA */}
+      {/* formulario com 10 questoes criadas pela IA */}
       {!corrigindo && telaAtual === 'quiz' && provaGerada && (
         <QuizAvaliacao 
           dadosProva={provaGerada} 
@@ -87,21 +89,13 @@ export default function Trilhas() {
             </ul>
           </div>
 
-          <button 
+          <ButtonWithIcon 
             onClick={() => setTelaAtual('escolha')} 
-            style={{ 
-              marginTop: '20px', 
-              padding: '12px 25px', 
-              cursor: 'pointer', 
-              backgroundColor: '#0056b3', 
-              color: 'white', 
-              border: 'none', 
-              borderRadius: '5px',
-              fontWeight: 'bold'
-            }}
-          >
-            Criar Nova Trilha
-          </button>
+            title="Criar Nova Trilha"
+            icon={<Plus size={18} />}
+            variant="primary"
+            style={{ marginTop: '20px' }}
+          />
         </div>
       )}
     </div>

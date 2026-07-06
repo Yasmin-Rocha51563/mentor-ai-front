@@ -5,12 +5,16 @@ import styles from '../pages/HomePage.module.css';
 const Header = () => {
   const navigate = useNavigate();
 
-  // Função para fazer o logout real limpando as credenciais de segurança
-  const handleLogout = () => {
-    localStorage.clear(); // Apaga o Token JWT e o userId do navegador
-    console.log('Sessão encerrada com sucesso!');
-    navigate('/'); // Redireciona para a tela de login
-  };
+ const handleLogout = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  localStorage.clear(); 
+
+  console.log('Sessão encerrada com sucesso!');
+  setTimeout(() => {
+    navigate('/', { replace: true });
+  }, 50);
+};
 
   return (
     <header className={styles.header}>

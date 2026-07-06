@@ -1,3 +1,4 @@
+/* Estilos Globais de Mensagem Markdown */
 .mensagem h1,
 .mensagem h2,
 .mensagem h3 {
@@ -56,24 +57,306 @@
   color: #555;
 }
 
-
-.chatHeader {
+/* --- Layout da Página de Chat --- */
+.chatPageLayout {
   display: flex;
-  justify-content: flex-end;
-  padding: 10px;
+  height: 100vh;
+  background-color: #f4f7f9;
+  overflow: hidden;
 }
 
-.btnLimpar {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
+.chatMainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chatDashboardArea {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* --- Cartão Principal do Chat (Janela de Conversa) --- */
+.chatWindowCard {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(26, 58, 92, 0.05);
+  border: 1px solid #e0e6ed;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  max-height: calc(100vh - 160px);
+}
+
+.chatWindowCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #eef2f6;
+  background-color: #ffffff;
+}
+
+.chatWindowBackBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s;
+  color: #1A3A5C;
+  transition: opacity 0.2s ease;
 }
 
-.btnLimpar:hover {
-  background-color: #ff1a1a;
+.chatWindowBackBtn:hover {
+  opacity: 0.8;
+}
+
+.chatWindowBackBtn span {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #1A3A5C;
+}
+
+.chatBackIcon {
+  color: #1A3A5C;
+}
+
+/* --- Histórico de Mensagens --- */
+.chatHistoryScroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #f7f9fb;
+}
+
+.chatMsgRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 80%;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chatMsgUser {
+  align-self: flex-end;
+  flex-direction: row; /* Balão esquerda, Avatar direita */
+}
+
+.chatMsgAI {
+  align-self: flex-start;
+  flex-direction: row; /* Avatar esquerda, Balão direita */
+}
+
+/* --- Avatares --- */
+.chatMsgAvatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.avatarRing {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.userAvatar .avatarRing {
+  background-color: #e2e8f0;
+  color: #4a5568;
+  border: 1px solid #cbd5e0;
+}
+
+.aiAvatar .avatarRing {
+  background-color: #1A3A5C;
+  color: #ffffff;
+  border: 1px solid #10243B;
+  box-shadow: 0 2px 5px rgba(26, 58, 92, 0.15);
+}
+
+.avatarRing.thinking {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Balões de Texto --- */
+.chatMsgBubble {
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-size: 15px;
+  line-height: 1.5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  font-family: 'Nunito', sans-serif;
+}
+
+.chatMsgUser .chatMsgBubble {
+  background-color: #1A3A5C;
+  color: #ffffff;
+  border-top-right-radius: 2px;
+  text-align: left;
+}
+
+.chatMsgAI .chatMsgBubble {
+  background-color: #ffffff;
+  color: #2d3748;
+  border: 1px solid #e2e8f0;
+  border-top-left-radius: 2px;
+  text-align: left;
+}
+
+.chatMsgBubble p {
+  margin: 0;
+}
+
+.thinkingMsg {
+  background-color: #ffffff;
+  color: #718096;
+  border: 1px solid #e2e8f0;
+  font-style: italic;
+}
+
+/* --- Área de Input de Mensagens --- */
+.chatInputAreaRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #eef2f6;
+  background-color: #ffffff;
+}
+
+.chatPillInputWrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background-color: #f7fafc;
+  border: 1px solid #cbd5e0;
+  border-radius: 9999px;
+  padding: 4px 6px 4px 16px;
+  transition: all 0.2s ease;
+}
+
+.chatPillInputWrapper:focus-within {
+  border-color: #1A3A5C;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.1);
+}
+
+.chatPillInputWrapper input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+  padding: 8px 0;
+  color: #2d3748;
+  font-family: 'Nunito', sans-serif;
+}
+
+.chatPillInputWrapper input::placeholder {
+  color: #a0aec0;
+}
+
+.chatInnerSendBtn {
+  background-color: #1A3A5C;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chatInnerSendBtn:hover:not(:disabled) {
+  background-color: #255180;
+  transform: scale(1.05);
+}
+
+.chatInnerSendBtn:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* Botão Laranja "Enviar" */
+.chatOrangeSendBtn {
+  background-color: #F5A623;
+  color: #ffffff;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  height: 40px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(245, 166, 35, 0.2);
+}
+
+.chatOrangeSendBtn:hover:not(:disabled) {
+  background-color: #e09216;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(245, 166, 35, 0.3);
+}
+
+.chatOrangeSendBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.chatOrangeSendBtn:disabled {
+  background-color: #cbd5e0;
+  color: #a0aec0;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* --- Botões de Atalho Inferiores --- */
+.chatBottomShortcutButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.chatBottomShortcutButtons > button {
+  flex: 1;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .chatBottomShortcutButtons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .chatMsgRow {
+    max-width: 90%;
+  }
 }

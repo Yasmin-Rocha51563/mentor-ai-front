@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ButtonWithIcon from '../components/ButtonWithIcon.jsx';
+import { Send } from 'lucide-react';
 
 export default function QuizAvaliacao({ dadosProva, onFinalizarProva, onVoltar }) {
     const [respostasAluno, setRespostasAluno] = useState({});
@@ -92,25 +94,15 @@ export default function QuizAvaliacao({ dadosProva, onFinalizarProva, onVoltar }
                     </div>
                 ))}
 
-                <button
+                <ButtonWithIcon
                     type="submit"
+                    variant="success"
                     disabled={carregando}
-                    style={{
-                        display: 'block',
-                        width: '100%',
-                        padding: '15px',
-                        fontSize: '18px',
-                        fontWeight: 'bold',
-                        color: 'white',
-                        backgroundColor: '#28a745',
-                        border: 'none',
-                        borderRadius: '8px',
-                        cursor: carregando ? 'not-allowed' : 'pointer',
-                        marginTop: '30px'
-                    }}
-                >
-                    {carregando ? "Enviando para Correção..." : "Enviar Respostas para Correção"}
-                </button>
+                    fullWidth={true}
+                    title={carregando ? "Enviando..." : "Enviar Respostas para Correção"}
+                    icon={<Send size={18} />}
+                    style={{ marginTop: '30px', padding: '15px' }}
+                />
             </form>
         </div>
     );

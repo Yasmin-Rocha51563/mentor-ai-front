@@ -1,0 +1,102 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px; 
+  font-family: var(--font-main, 'Nunito', sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 14px; 
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  outline: none;
+  user-select: none;
+}
+
+.fullWidth {
+  width: 100%;
+  display: flex;
+}
+
+.primary {
+  background-color: #E29943; 
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(226, 153, 67, 0.15);
+}
+
+.primary:hover:not(:disabled) {
+background-color: #cb8432;
+}
+
+.primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(26, 58, 92, 0.15);
+}
+
+.secondary {
+  background: transparent;
+  color: #1A3A5C;
+  border: 1px solid #1A3A5C;
+}
+
+.secondary:hover:not(:disabled) {
+  background: rgba(26, 58, 92, 0.05);
+}
+
+.secondary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.success {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+  border: 1px solid rgba(40, 167, 69, 0.1);
+}
+
+.success:hover:not(:disabled) {
+  background: linear-gradient(135deg, #34ce57 0%, #28a745 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(40, 167, 69, 0.25);
+}
+
+.success:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.15);
+}
+
+.danger {
+  background: linear-gradient(135deg, #dc3545 0%, #bd2130 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
+  border: 1px solid rgba(220, 53, 69, 0.1);
+}
+
+.danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #e4606d 0%, #dc3545 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(220, 53, 69, 0.25);
+}
+
+.danger:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15);
+}
+
+.disabled {
+ opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.iconContainer {
+ display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover:not(:disabled) .iconContainer {
+  transform: scale(1.1);
+}
