@@ -1,0 +1,200 @@
+.perfilPageLayout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+.perfilMainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.perfilCardContainer {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.perfilMainCard {
+  width: 100%;
+  max-width: 850px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.perfilBackHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #0b2545;
+  font-weight: bold;
+}
+
+.perfilBackHeader h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.perfilDivider {
+  border: 0;
+  border-top: 1px solid #e9ecef;
+  margin: 20px 0;
+}
+
+.perfilAvatarRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.perfilAvatarWrapper {
+  position: relative;
+  width: 75px;
+  height: 75px;
+}
+
+.perfilUserAvatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e9ecef;
+}
+
+.perfilEditAvatarBadge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #0b2545;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.perfilAvatarInfo h3 {
+  margin: 0 0 4px 0;
+  color: #334155;
+  font-size: 18px;
+}
+
+.perfilAvatarInfo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.perfilSubCardForm {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 500px;
+}
+
+.perfilSubCardForm h3 {
+  margin: 0 0 20px 0;
+  color: #0b2545;
+  font-size: 18px;
+}
+
+.perfilInputGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #edf2f7;
+  padding: 12px 0;
+}
+
+.perfilInputGroup label {
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.perfilInputGroup input {
+  border: none;
+  text-align: right;
+  color: #2d3748;
+  font-size: 14px;
+  width: 60%;
+  outline: none;
+  background: transparent;
+}
+
+.perfilInputGroup input:focus {
+  color: #000;
+  font-weight: 500;
+}
+
+.perfilSenhaRow {
+  margin-bottom: 25px;
+}
+
+.perfilLinkAlterarSenha {
+  color: #0b2545;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Botões Reutilizáveis de Ação */
+.perfilFormActions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.perfilBtnCancel {
+  background: transparent;
+  border: 1px solid #a0aec0;
+  color: #4a5568;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.perfilBtnCancel:hover {
+  background: #edf2f7;
+}
+
+.perfilBtnSave {
+  background-color: #f2a134; 
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.perfilBtnSave:hover {
+  background-color: #e08f24;
+}
+
+.perfilAlert {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+.perfilAlert.sucesso { background-color: #c6f6d5; color: #22543d; }
+.perfilAlert.erro { background-color: #fed7d7; color: #742a2a; }

@@ -5,13 +5,16 @@ import Login from '../pages/Login';
 import Cadastro from '../pages/Cadastro';
 import Home from '../pages/Home';
 import Chat from '../Chat.jsx';
+import Perfil from '../pages/Perfil.jsx';
+import EditarPerfil from '../pages/EditarPerfil.jsx';
+import AlterarSenha from '../pages/AlterarSenha.jsx';
 
-// COMPONENTE DE GUARDA (ROTA PROTEGIDA)
+// componente de guarda
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
   
   if (!token) {
-    // o navigate redireciona automaticamentee o replace limpa o histoico da seta do navegador
+    // o navigate redireciona automaticamente e o replace limpa o historico da seta do navegador
     return <Navigate to="/" replace />;
   }
   
@@ -48,6 +51,31 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <Trilhas />
+            </ProtectedRoute>
+          } 
+        />
+
+        <Route 
+          path="/perfil" 
+          element={
+            <ProtectedRoute>
+              <Perfil />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/editar-perfil" 
+          element={
+            <ProtectedRoute>
+              <EditarPerfil />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/alterar-senha" 
+          element={
+            <ProtectedRoute>
+              <AlterarSenha />
             </ProtectedRoute>
           } 
         />

@@ -197,28 +197,31 @@ export default function Chat() {
               </button>
             </div>
           </div>
-          
-          <div className="chatBottomShortcutButtons">
+        <div className="chatBottomShortcutButtons">
             <ButtonWithIcon 
               onClick={() => enviarMensagem("O que estudar hoje?")}
-              title="O que estudar hoje?" 
               icon={<ChevronRight size={18} />} 
               variant="primary"
-            />
+            >
+              O que estudar hoje?
+            </ButtonWithIcon>
+
             <ButtonWithIcon 
               onClick={() => enviarMensagem("Como está meu progresso?")}
-              title="Revisar meu progresso" 
               icon={<ChevronRight size={18} />} 
               variant="primary"
-            />
+            >
+              Revisar meu progresso
+            </ButtonWithIcon>
+
             <ButtonWithIcon 
               onClick={() => enviarMensagem("Gostaria de fazer mais perguntas.")}
-              title="Perguntar mais" 
               icon={<ChevronRight size={18} />} 
               variant="primary"
-            />
+            >
+              Perguntar mais
+            </ButtonWithIcon>
           </div>
-          
         </div>
       </main>
     </div>
