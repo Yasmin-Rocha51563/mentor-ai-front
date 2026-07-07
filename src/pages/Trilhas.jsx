@@ -43,8 +43,7 @@ export default function Trilhas() {
     
       {corrigindo && (
         <div style={{ textAlign: 'center', margin: '40px auto', fontSize: '18px', fontWeight: 'bold' }}>
-          🔄 O Mentor AI e o Gemini estão avaliando suas respostas...<br />
-          Calculando sua nota e gravando sua trilha de estudos no banco de dados!
+          🔄 O Mentor IA e o Gemini estão avaliando suas respostas...<br />
         </div>
       )}
 

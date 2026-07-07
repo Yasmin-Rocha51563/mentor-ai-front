@@ -18,9 +18,7 @@ export default function EscolhaTrilha({ onProvaGerada }) {
     setCarregando(true);
     setErro('');
     try {
-
       const dadosProva = await obterAvaliacao(area);
-      
       onProvaGerada(dadosProva);
     } catch (err) {
       setErro('Não foi possível gerar a avaliação. Tente novamente.');
@@ -32,13 +30,18 @@ export default function EscolhaTrilha({ onProvaGerada }) {
 
   return (
     <div style={{ padding: '20px', textAlign: 'center', fontFamily: 'sans-serif' }}>
-      <h2>Seja bem-vindo ao Mentor AI</h2>
-      <p>Escolha uma área de conhecimento para iniciar sua avaliação diagnóstica:</p>
+      {/* 🚀 CORRIGIDO: Cor adicionada diretamente no h2 e no p para dar contraste total */}
+      <h2 style={{ color: '#0b2545', fontWeight: 'bold', margin: '0 0 10px 0' }}>
+        Seja bem-vindo ao Mentor IA
+      </h2>
+      <p style={{ color: '#1e293b', fontSize: '16px', margin: '0 0 20px 0' }}>
+        Escolha uma área de conhecimento para iniciar sua avaliação diagnóstica:
+      </p>
       
       {erro && <p style={{ color: 'red' }}>{erro}</p>}
       
       {carregando ? (
-        <div style={{ margin: '20px', fontSize: '18px', fontWeight: 'bold' }}>
+        <div style={{ margin: '20px', fontSize: '18px', fontWeight: 'bold', color: '#0b2545' }}>
           🔄 O Gemini está gerando sua prova personalizada... Aguarde.
         </div>
       ) : (

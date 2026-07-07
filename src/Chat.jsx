@@ -16,6 +16,31 @@ export default function Chat() {
   //pega id do usuario logado pra buscar o historico correto
   const userId = localStorage.getItem('userId') || 1;
 
+ // Função auxiliar para processar e formatar respostas (JSON ou Texto Puro)
+  function formatarRespostaIA(respostaBruta) {
+    if (!respostaBruta) return "";
+
+    // 1. Tenta verificar se a resposta é um JSON estructurado da IA
+    try {
+      const dadosIA = JSON.parse(respostaBruta);
+      
+      const textoPrincipal = dadosIA.feedback || dadosIA.resposta || dadosIA.response || "";
+      const listaBruta = dadosIA.sugestoes_perguntas || dadosIA.sugestoes_de_perguntas;
+      
+      let listaSugestoes = "";
+      if (Array.isArray(listaBruta)) {
+        listaSugestoes = "\n\n### 🤔 Sugestões de perguntas:\n" + 
+          listaBruta.map(sugestao => `* ${sugestao}`).join("\n");
+      }
+      
+      return textoPrincipal + listaSugestoes;
+    } catch (e) {
+      // 2. SE FALHAR O PARSE, SIGNIFICA QUE É TEXTO PURO! 
+      // Retorna o texto direto, sem quebrar a tela.
+      return typeof respostaBruta === 'string' ? respostaBruta : JSON.stringify(respostaBruta);
+    }
+  }
+
   //exibição do histórico de conversas ao carregar a tela
   useEffect(() => {
     async function carregarHistorico() {
@@ -26,7 +51,8 @@ export default function Chat() {
           const msgMapeadas = [];
           dados.forEach(item => {
             msgMapeadas.push({ texto: item.pergunta, tipo: "enviado" });
-            msgMapeadas.push({ texto: item.resposta, tipo: "recebida" });
+            // Formata a resposta antiga salva no banco de dados
+            msgMapeadas.push({ texto: formatarRespostaIA(item.resposta), tipo: "recebida" });
           });
           setMensagens(msgMapeadas);
         }
@@ -70,23 +96,8 @@ export default function Chat() {
         throw new Error(dados.mensagem || dados.error || 'Erro na requisição');
       }
 
-      let textoFinal = "";
-
-      try {
-        const dadosIA = JSON.parse(dados.resposta);
-        const textoPrincipal = dadosIA.resposta || dadosIA.response || "";
-        const listaBruta = dadosIA.sugestoes_de_perguntas || dadosIA.suggestions_de_perguntas;
-        
-        let listaSugestoes = "";
-        if (Array.isArray(listaBruta)) {
-          listaSugestoes = "\n\n### 🤔 Sugestões de perguntas:\n" + 
-            listaBruta.map(sugestao => `* ${sugestao}`).join("\n");
-        }
-        
-        textoFinal = textoPrincipal + listaSugestoes;
-      } catch (e) {
-        textoFinal = typeof dados.resposta === 'string' ? dados.resposta : JSON.stringify(dados);
-      }
+      // 🔥 Processa os dados recebidos usando a nossa função mapeada
+      const textoFinal = formatarRespostaIA(dados.resposta);
 
       setMensagens((prev) => [
         ...prev,
@@ -197,7 +208,7 @@ export default function Chat() {
               </button>
             </div>
           </div>
-        <div className="chatBottomShortcutButtons">
+          <div className="chatBottomShortcutButtons">
             <ButtonWithIcon 
               onClick={() => enviarMensagem("O que estudar hoje?")}
               icon={<ChevronRight size={18} />} 

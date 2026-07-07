@@ -90,3 +90,18 @@
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
+/* 🔥 Força os títulos dentro do card maior (O que estudar hoje) a ficarem escuros */
+.card h2, .card h3 {
+  color: #0b2545;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* 🔥 Força os títulos dentro do card lateral (Mentoria IA) a ficarem escuros */
+.cardSide h2, .cardSide h3 {
+  color: #0b2545;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
